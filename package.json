@@ -1,0 +1,35 @@
+{
+    "name": "apex-autocomplete",
+    "displayName": "Apex Auto-Complete",
+    "description": "Adds Auto-Completion for Salesforce Apex",
+    "version": "0.0.1",
+    "publisher": "chuckjonas",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ChuckJonas/vscode-apex-autocomplete.git"
+    },
+    "bugs": {
+        "url": "https://github.com/ChuckJonas/vscode-apex-autocomplete/issues"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/src/extension",
+    "scripts": {
+        "compile": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "typescript": "^2.0.3",
+        "vscode": "^1.0.0",
+        "mocha": "^2.3.3",
+        "@types/node": "^6.0.40",
+        "@types/mocha": "^2.2.32"
+    }
+}
