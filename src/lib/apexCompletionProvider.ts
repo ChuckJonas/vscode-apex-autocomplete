@@ -25,28 +25,37 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 	public provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): Thenable<vscode.CompletionItem[]>{
 		let path = document.fileName;
 		let workspace = vscode.workspace.rootPath;
-		let tempFile = this.tempFolder + '/temp.cls';
+		let tempFile = this.tempFolder + '/tmp.cls';
 		let respFile = this.responseFile;
 		let cmd = `java -jar ${this.jarPath} --action=listCompletions --projectPath='${workspace}' --currentFilePath='${path}' --currentFileContentPath='${tempFile}'  --line=${position.line+1} --column=${position.character+1} --responseFilePath='${this.responseFile}'`;
 
 		return new Promise(
 			(resolve, reject)=>{
 				fs.writeFile(tempFile, document.getText(), function(err) {
-					if (err) reject(err);
+					if (err){
+						vscode.window.showErrorMessage('Could not write to temp dir: ' + err);
+						reject(err);
+					}
 					else resolve();
 				});
 		})
-		.then(function(){
-			return new Promise(function(resolve, reject) {
+		.then(() => {
+			return new Promise((resolve, reject) => {
 				ChildProcess.exec(cmd, (error, stdout, stderr)=>{
-					if (error) reject(stderr);
+					if (error){
+						vscode.window.showErrorMessage('Could not run jar');
+						reject(stderr);
+					}
 					resolve();
 				});
 			});
-		}).then(function(){
-			return new Promise(function(resolve, reject) {
-				fs.readFile(respFile, 'utf8', function (err, data) {
-					if (err) reject(err);
+		}).then(() => {
+			return new Promise((resolve, reject) => {
+				fs.readFile(respFile, 'utf8', (err, data) => {
+					if (err){
+						vscode.window.showErrorMessage('Could not read results: ' + err);
+						reject(err);
+					}
 					console.log(data);
 					let cleanData = data.replace('RESULT=SUCCESS\n','');
 					let parts = cleanData.split('\n');
@@ -54,9 +63,11 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 					for(let i = 0; i < parts.length; i++){
 						try{
 							let obj = JSON.parse(parts[i]) as CompletionResult;
-
-							completions.push(this.createCompletion(obj));
-						}catch(e){}
+							let completion = this.createCompletion(obj);
+							completions.push(completion);
+						}catch(e){
+							console.log(e);
+						}
 					}
 					resolve(completions);
 				});
@@ -76,7 +87,7 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 			insertText = obj.identity;
 			kind = vscode.CompletionItemKind.Value;
 			documentation = obj.doc;
-		}else{
+		}else{ //method or prop
 			documentation = obj.signature;
 
 			const extractFuncRegex = /\b[^()]+(\(.*\))$/g;

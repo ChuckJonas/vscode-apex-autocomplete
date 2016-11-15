@@ -9,8 +9,8 @@ export function activate(context: vscode.ExtensionContext) {
             'apex',
             new ApexCompletionItemProvider(
                     context.asAbsolutePath('bin/tooling-force.jar'),
-                    context.asAbsolutePath('bin/tmp/response.json'),
-                    context.asAbsolutePath('bin/tmp')
+                    context.asAbsolutePath('bin/response.json'),
+                    context.asAbsolutePath('bin')
                 )
                 ,'.', '@'
             );

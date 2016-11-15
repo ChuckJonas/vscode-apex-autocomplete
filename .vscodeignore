@@ -6,5 +6,6 @@ src/**
 **/*.map
 .gitignore
 tsconfig.json
-bin/tmp/**
+bin/response.json
+bin/tmp.cls
 

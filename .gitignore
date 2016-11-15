@@ -1,3 +1,4 @@
 out
 node_modules
-bin/tmp
+bin/tmp.cls
+bin/response.json
