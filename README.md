@@ -10,19 +10,19 @@ Currently provides auto-complete on the following:
 
 * System namespaces
 * Class methods & properties
+* Annotations
 
 Possible future completions:
 
 * SObject fields
 * SOQL Queries
-* Annotations
 
 ## Requirements
 
-* Mavensmate
-* Java
+* `src` folder must be in root of workspace
+* Java runtime installed an on path
 
 ## Known Issues
 
-This is running an external jar that is not really optimized for the interfaces provided by vs-code.
-Because of this, auto-complete may take some time to respond.
+After running a completion for the first time, a folder called `.vim-foce.com` will be created in your workspace root.
+This is a side effect of the current version of `tooling-force.com`.
