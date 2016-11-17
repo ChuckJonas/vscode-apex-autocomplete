@@ -2,7 +2,7 @@
     "name": "apex-autocomplete",
     "displayName": "Apex Auto-Complete",
     "description": "Adds Auto-Completion for Salesforce Apex",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "publisher": "chuckjonas",
     "engines": {
         "vscode": "^1.5.0"
@@ -15,6 +15,13 @@
     "bugs": {
         "url": "https://github.com/ChuckJonas/vscode-apex-autocomplete/issues"
     },
+    "keywords": [
+        "Apex",
+        "IntelliSense",
+        "Salesforce",
+        "Auto-Complete",
+        "Code Completion"
+    ],
     "categories": [
         "Languages"
     ],

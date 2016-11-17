@@ -16,6 +16,8 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 		this.runServer();
 	}
 
+
+
 	/**
 	 * Provide completion items for the given position and document.
 	 *
@@ -112,7 +114,12 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 			kind = vscode.CompletionItemKind.Value;
 			documentation = obj.doc;
 		}else{ //method or prop
-			documentation = obj.signature;
+			obj.signature = obj.signature.replace('( ', '(');
+			if(obj.doc){
+				documentation = obj.doc;
+			}else{
+				documentation = obj.signature;
+			}
 
 			const extractFuncRegex = /\b[^()]+(\(.*\))$/g;
 			let funcMatch = extractFuncRegex.exec(obj.signature);
