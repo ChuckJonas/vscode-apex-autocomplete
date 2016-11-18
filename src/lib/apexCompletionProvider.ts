@@ -16,8 +16,6 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 		this.runServer();
 	}
 
-
-
 	/**
 	 * Provide completion items for the given position and document.
 	 *

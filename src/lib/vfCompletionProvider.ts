@@ -5,6 +5,7 @@ import * as child_process from 'child_process';
 
 import * as vf from './visualForce';
 
+//there's gotta be a better way to do this...  Seems to work surprisingly well tho
 export class VfCompletionItemProvider implements vscode.CompletionItemProvider{
 
 	public constructor(){}
@@ -19,14 +20,12 @@ export class VfCompletionItemProvider implements vscode.CompletionItemProvider{
 	 * The lack of a result can be signaled by returning `undefined`, `null`, or an empty array.
 	 */
 	public provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): vscode.CompletionItem[]{
-        console.log(vf.definition);
 
 		let completions = new Array<vscode.CompletionItem>();
 
 		let i = position.line;
-
-		let lastOpen = -1;
-		while(lastOpen == -1 ){
+		let lastOpenTag = -1;
+		while(lastOpenTag == -1 ){
 			if(i<0){
 				break;
 			}
@@ -37,52 +36,62 @@ export class VfCompletionItemProvider implements vscode.CompletionItemProvider{
 				line = line.substr(0, position.character);
 			}
 
-			lastOpen = line.lastIndexOf('<');
-			let lastClose = line.lastIndexOf('>');
+			lastOpenTag = line.lastIndexOf('<');
+			let lastCloseTag = line.lastIndexOf('>');
 			let isOutside = false;
-			if(line.charAt(lastClose-1) == '/'){
+			if(line.charAt(lastCloseTag-1) == '/'){
 				isOutside = true;
 			}
 
 			let lastTagApex = line.lastIndexOf('<apex:');
 
-			if(lastOpen != -1 && lastOpen > lastClose){ // we are in a tag
-				if(lastTagApex == lastOpen){ //we are in a apex: tag
-					//load tags
-					let lastTag = line.substr(lastTagApex, line.length);
-					if(lastTag.indexOf(' ') != -1){ //show attributes
-						lastTag = lastTag.substring(0, lastTag.indexOf(' '));
-						lastTag = lastTag.replace('<','');
-						let tagObj = vf.definition[lastTag];
-						if(tagObj){
-							for (var key in tagObj.attribs) {
-								if (tagObj.attribs.hasOwnProperty(key)) {
-									var attr = tagObj.attribs[key];
-									let completion = new vscode.CompletionItem(`${key}: ${attr.type}`,
-												vscode.CompletionItemKind.Field);
-
-									completion.insertText = `${key}="${attr.type}"`
-									completions.push(completion);
-								}
-							}
-							return completions;
-						}
-					}else{ //no spacing for auto-complete
-						return null;
-					}
+			if(lastOpenTag != -1 && lastOpenTag > lastCloseTag){ // we are in a tag
+				if(lastTagApex == lastOpenTag){ //we are in a apex: tag
+					let apexTag = this.getApexTag(line, lastTagApex);
+					return this.showTagAttributes(apexTag);
 				}else{ //not in an apex tag
-					if(lastOpen == position.character-1){
+					if(lastOpenTag == position.character-1 && line.substr(lastOpenTag,lastOpenTag+1) != ' '){
 						break;
 					}
 					return null;
 				}
 			}
-
 			i--;
 		}
 
+        return this.showApexTags(document, position);
+	}
 
-        for (var key in vf.definition) {
+	private getApexTag(line: string, start: number){
+		let tagObj: any;
+		let lastTag = line.substr(start, line.length);
+		if(lastTag.indexOf(' ') != -1){ //show attributes
+			lastTag = lastTag.substring(0, lastTag.indexOf(' ')).replace('<','');
+			tagObj = vf.definition[lastTag];
+		}
+		return tagObj
+	}
+
+	private showTagAttributes(apexTag: any){
+		let completions = new Array<vscode.CompletionItem>();
+		if(apexTag){
+			for (var key in apexTag.attribs) {
+				if (apexTag.attribs.hasOwnProperty(key)) {
+					var attr = apexTag.attribs[key];
+					let completion = new vscode.CompletionItem(`${key}: ${attr.type}`,
+								vscode.CompletionItemKind.Field);
+
+					completion.insertText = `${key}="${attr.type}"`
+					completions.push(completion);
+				}
+			}
+		}
+		return completions;
+	}
+
+	private showApexTags(document: vscode.TextDocument, position: vscode.Position): Array<vscode.CompletionItem>{
+		let completions = new Array<vscode.CompletionItem>();
+		for (var key in vf.definition) {
             if (vf.definition.hasOwnProperty(key)) {
                 var element = vf.definition[key];
                 let completion = new vscode.CompletionItem(key,
@@ -95,10 +104,7 @@ export class VfCompletionItemProvider implements vscode.CompletionItemProvider{
 				completions.push(completion);
             }
         }
-
-        return completions;
-
+		return completions;
 	}
-
 
 }
