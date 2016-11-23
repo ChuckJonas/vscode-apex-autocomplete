@@ -11,6 +11,7 @@ Currently provides auto-complete on the following:
 * System namespaces
 * Class methods & properties
 * Annotations
+* Visualforce tags & Attributes (beta)
 
 Possible future completions:
 
