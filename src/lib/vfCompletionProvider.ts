@@ -100,6 +100,9 @@ export class VfCompletionItemProvider implements vscode.CompletionItemProvider{
 				if(preCharacter != '<'){
 					completion.insertText = `<${key}`;
 				}
+				if(element.documentation){
+					completion.documentation = element.documentation;
+				}
 
 				completions.push(completion);
             }

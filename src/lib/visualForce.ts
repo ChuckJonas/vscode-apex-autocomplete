@@ -1,5 +1,6 @@
 export let definition = {
   "apex:attribute": {
+    "documentation":"A definition of an attribute on a custom component. The attribute tag can only be a child of a component tag.\nNote that you cannot define attributes with names like id or rendered. These attributes are automatically created for all custom component definitions.",
     "simple": true,
     "attribs": {
       "access": {
@@ -32,6 +33,7 @@ export let definition = {
     }
   },
   "apex:actionFunction": {
+    "documentation":"A component that provides support for invoking controller action methods directly from JavaScript code using an AJAX request. An <apex:actionFunction> component must be a child of an <apex:form> component.\n\nUnlike <apex:actionSupport>, which only provides support for invoking controller action methods from other Visualforce components, <apex:actionFunction> defines a new JavaScript function which can then be called from within a block of JavaScript code.\n\nNote: Beginning with API version 23 you can't place <apex:actionFunction> inside an iteration component — <apex:pageBlockTable>, <apex:repeat>, and so on. Put the <apex:actionFunction> after the iteration component, and inside the iteration put a normal JavaScript function that calls it.",
     "simple": true,
     "attribs": {
       "action": {
@@ -78,6 +80,7 @@ export let definition = {
     }
   },
   "apex:actionPoller": {
+    "documentation":"A timer that sends an AJAX request to the server according to a time interval that you specify. Each request can result in a full or partial page update.\n\nAn <apex:actionPoller> must be within the region it acts upon. For example, to use an <apex:actionPoller> with an <apex:actionRegion>, the <apex:actionPoller> must be within the <apex:actionRegion>.\n\nConsiderations When Using <apex:actionPoller>\n\nAction methods used by <apex:actionPoller> should be lightweight. It's a best practice to avoid performing DML, external service calls, and other resource-intensive operations in action methods called by an <apex:actionPoller>. Consider carefully the effect of your action method being called repeatedly by an <apex:actionPoller> at the interval you specify, especially if it's used on a page that will be widely distributed, or left open for long periods.\n<apex:actionPoller> refreshes the connection regularly, keeping login sessions alive. A page with <apex:actionPoller> on it won't time out due to inactivity.\nIf an <apex:actionPoller> is ever re-rendered as the result of another action, it resets itself.\nAvoid using this component with enhanced lists.",
     "simple": true,
     "attribs": {
       "action": {
@@ -121,6 +124,7 @@ export let definition = {
     }
   },
   "apex:actionRegion": {
+    "documentation":"An area of a Visualforce page that demarcates which components should be processed by the Force.com server when an AJAX request is generated. Only the components in the body of the <apex:actionRegion> are processed by the server, thereby increasing the performance of the page.\n\nNote that an <apex:actionRegion> component only defines which components the server processes during a request—it doesn’t define what areas of the page are re-rendered when the request completes. To control that behavior, use the rerender attribute on an <apex:actionSupport>, <apex:actionPoller>, <apex:commandButton>, <apex:commandLink>, <apex:tab>, or <apex:tabPanel> component.",
     "simple": false,
     "attribs": {
       "id": {
@@ -150,6 +154,7 @@ export let definition = {
     }
   },
   "apex:actionStatus": {
+    "documentation":"A component that displays the status of an AJAX update request. An AJAX request can either be in progress or complete.",
     "simple": false,
     "attribs": {
       "dir": {
@@ -240,6 +245,7 @@ export let definition = {
     }
   },
   "apex:actionSupport": {
+    "documentation":"A component that adds AJAX support to another component, allowing the component to be refreshed asynchronously by the server when a particular event occurs, such as a button click or mouseover.",
     "simple": true,
     "attribs": {
       "action": {
@@ -303,6 +309,7 @@ export let definition = {
     }
   },
   "apex:areaSeries": {
+    "documentation":"A data series to be rendered as shaded areas in a Visualforce chart. It's similar to a line series with the fill attribute set to true, except that multiple Y values for each X will \"stack\" as levels upon each other.\n\nAt a minimum you must specify the fields in the data collection to use as X and Y values for each point along the line that defines the amount of area each point represents, as well as the X and Y axes to scale against. Add multiple Y values to add levels to the chart. Each level takes a new color.\n\nNote: This component must be enclosed within an <apex:chart> component. You can have multiple <apex:areaSeries> components in a single chart, and you can add <apex:barSeries>, <apex:lineSeries>, and <apex:scatterSeries> components, but the results might not be very readable.",
     "simple": false,
     "attribs": {
       "axis": {
@@ -369,6 +376,7 @@ export let definition = {
     }
   },
   "apex:axis": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "dashSize": {
@@ -439,6 +447,7 @@ export let definition = {
     }
   },
   "apex:barSeries": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "axis": {
@@ -538,6 +547,7 @@ export let definition = {
     }
   },
   "apex:canvasApp": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "applicationName": {
@@ -595,6 +605,7 @@ export let definition = {
     }
   },
   "apex:chart": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "animate": {
@@ -669,6 +680,7 @@ export let definition = {
     }
   },
   "apex:chartLabel": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "color": {
@@ -722,6 +734,7 @@ export let definition = {
     }
   },
   "apex:chartTips": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "height": {
@@ -759,6 +772,7 @@ export let definition = {
     }
   },
   "apex:column": {
+    "documentation": "A single column in a table. An <apex:column> component must always be a child of an <apex:dataTable> or <apex:pageBlockTable> component.\n\nNote that if you specify an sObject field as the value attribute for an <apex:column>, the associated label for that field is used as the column header by default. To override this behavior, use the headerValue attribute on the column, or the column's header facet.\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated <td> tag for the column in every row of the table.",
     "simple": true,
     "attribs": {
       "breakBefore": {
@@ -850,6 +864,7 @@ export let definition = {
     }
   },
   "apex:commandButton": {
+    "documentation": "A button that is rendered as an HTML input element with the type attribute set to submit, reset, or image, depending on the <apex:commandButton> tag's specified values. The button executes an action defined by a controller, and then either refreshes the current page, or navigates to a different page based on the PageReference variable that is returned by the action.\n\nAn <apex:commandButton> component must always be a child of an <apex:form> component.\n\nSee also: <apex:commandLink>\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated <input> tag.",
     "simple": true,
     "attribs": {
       "accesskey": {
@@ -960,6 +975,7 @@ export let definition = {
     }
   },
   "apex:commandLink": {
+    "documentation": "A link that executes an action defined by a controller, and then either refreshes the current page, or navigates to a different page based on the PageReference variable that is returned by the action. An <apex:commandLink> component must always be a child of an <apex:form> component.\nTo add request parameters to an <apex:commandLink>, use nested <apex:param> components.\n\nSee also: <apex:commandButton>, <apex:outputLink>.\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated <a> tag.",
     "simple": true,
     "attribs": {
       "accesskey": {
@@ -1081,6 +1097,7 @@ export let definition = {
     }
   },
   "apex:composition": {
+    "documentation": "An area of a page that includes content from a second template page. Template pages are Visualforce pages that include one or more <apex:insert> components. The <apex:composition> component names the associated template, and provides body for the template's <apex:insert> components with matching <apex:define> components. Any content outside of an <apex:composition> component is not rendered.\n\nSee also: <apex:insert>, <apex:define>",
     "simple": false,
     "attribs": {
       "rendered": {
@@ -1092,6 +1109,7 @@ export let definition = {
     }
   },
   "apex:dataList": {
+    "documentation": "An ordered or unordered list of values that is defined by iterating over a set of data. The body of the <apex:dataList> component specifies how a single item should appear in the list. The data set can include up to 1,000 items.",
     "simple": false,
     "attribs": {
       "dir": {
@@ -1167,6 +1185,7 @@ export let definition = {
     }
   },
   "apex:dataTable": {
+    "documentation": "An HTML table that’s defined by iterating over a set of data, displaying information about one item of data per row. The body of the <apex:dataTable> contains one or more column components that specify what information should be displayed for each item of data. The data set can include up to 1,000 items, or 10,000 items when the page is executed in read-only mode.\n\nFor Visualforce pages running Salesforce.com API version 20.0 or higher, an <apex:repeat> tag can be contained within this component to generate columns.\n\nSee also: <apex:panelGrid>\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated table's <tbody> tag.",
     "simple": false,
     "attribs": {
       "align": {
@@ -1311,6 +1330,7 @@ export let definition = {
     }
   },
   "apex:define": {
+    "documentation": "A template component that provides content for an <apex:insert> component defined in a Visualforce template page.",
     "simple": false,
     "attribs": {
       "name": {
@@ -1319,6 +1339,7 @@ export let definition = {
     }
   },
   "apex:detail": {
+    "documentation": "The standard detail page for a particular object, as defined by the associated page layout for the object in Setup. This component includes attributes for including or excluding the associated related lists, related list hover links, and title bar that appear in the standard Salesforce application interface.",
     "simple": true,
     "attribs": {
       "id": {
@@ -1378,6 +1399,7 @@ export let definition = {
     }
   },
   "apex:dynamicComponent": {
+    "documentation": "This tag acts as a placeholder for your dynamic Apex components. It has one required parameter—componentValue—which accepts the name of an Apex method that returns a dynamic component.\n\nThe following Visualforce components do not have dynamic Apex representations:\n<apex:attribute>\n<apex:component>\n<apex:componentBody>\n<apex:composition>\n<apex:define>\n<apex:dynamicComponent>\n<apex:include>\n<apex:insert>\n<apex:param>\n<apex:variable>",
     "simple": true,
     "attribs": {
       "componentValue": {
@@ -1396,6 +1418,7 @@ export let definition = {
     }
   },
   "apex:enhancedList": {
+    "documentation": "The list view picklist for an object, including its associated list of records for the currently selected view. In standard Salesforce applications this component is displayed on the main tab for a particular object. This component has additional attributes that can be specified, such as the height and rows per page, as compared to <apex:listView>.\n\nNote: When an <apex:enhancedList> is rerendered through another component's rerender attribute, the <apex:enhancedList> must be inside of an <apex:outputPanel> component that has its layout attribute set to \"block\". The <apex:enhancedList> component is not allowed on pages that have the attribute showHeader set to false. You can only have five <apex:enhancedList> components on a single page. Ext JS versions less than 3 should not be included on pages that use this component.\n\nSee also: <apex:listView>.",
     "simple": true,
     "attribs": {
       "customizable": {
@@ -1439,6 +1462,7 @@ export let definition = {
     }
   },
   "apex:facet": {
+    "documentation": "A placeholder for content that's rendered in a specific part of the parent component, such as the header or footer of an <apex:dataTable>.\n\nAn <apex:facet> component can only exist in the body of a parent component if the parent supports facets. The name of the facet component must match one of the pre-defined facet names on the parent component. This name determines where the content of the facet component is rendered. The order in which a facet component is defined within the body of a parent component doesn't affect the appearance of the parent component.\n\nSee <apex:dataTable> for an example of facets.\n\nNote: Although you can't represent an <apex:facet> directly in Apex, you can specify it on a dynamic component that has the facet. For example:",
     "simple": false,
     "attribs": {
       "name": {
@@ -1447,6 +1471,7 @@ export let definition = {
     }
   },
   "apex:flash": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "flashvars": {
@@ -1488,6 +1513,7 @@ export let definition = {
     }
   },
   "apex:form": {
+    "documentation": "A section of a Visualforce page that allows users to enter input and then submit it with an <apex:commandButton> or <apex:commandLink>. The body of the form determines the data that is displayed and the way it's processed. It's a best practice to use only one <apex:form> tag in a page or custom component.\n\nAs of API version 18.0, this tag can't be a child component of <apex:repeat>.\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated <form> tag.",
     "simple": false,
     "attribs": {
       "accept": {
@@ -1580,6 +1606,7 @@ export let definition = {
     }
   },
   "apex:gaugeSeries": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "colorSet": {
@@ -1631,6 +1658,7 @@ export let definition = {
     }
   },
   "apex:iframe": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "frameborder": {
@@ -1672,6 +1700,7 @@ export let definition = {
     }
   },
   "apex:image": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "alt": {
@@ -1760,6 +1789,7 @@ export let definition = {
     }
   },
   "apex:include": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "id": {
@@ -1778,6 +1808,7 @@ export let definition = {
     }
   },
   "apex:includeScript": {
+    "documentation": "A link to a JavaScript library that can be used in the Visualforce page. When specified, this component injects a script reference into the <head> element of the generated HTML page.\n\nMultiple references to the same script are de-duplicated, making this component safe to use inside an iteration component. This might occur if, for example, you use an <apex:includeScript> inside a custom component, and then use that component inside an <apex:repeat> iteration.\n\nFor performance reasons, you might choose to use a static JavaScript tag before your closing <apex:page> tag, rather than this component. If you do, you'll need to manage de-duplication yourself.\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated <script> tag.\n\n",
     "simple": true,
     "attribs": {
       "id": {
@@ -1789,6 +1820,7 @@ export let definition = {
     }
   },
   "apex:inlineEditSupport": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "changedStyleClass": {
@@ -1825,7 +1857,140 @@ export let definition = {
       }
     }
   },
+  "apex:input": {
+    "documentation": "An HTML5-friendly general purpose input component that adapts to the data expected by a form field. It uses the HTML type attribute to allow client browsers to display type-appropriate user input widgets, such as a date picker or range slider, or to perform client-side formatting or validation, such as with a numeric range or a telephone number. Use this component to get user input for a controller property or method that does not correspond to a field on a Salesforce object.\n\nThis component doesn't use Salesforce styling. Also, since it doesn't correspond to a Salesforce field, or any other data on an object, custom code is required to use the value the user enters.\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated <input> tag.",
+    "simple": true,
+    "attribs": {
+      "accesskey": {
+        "type": "String"
+      },
+      "dir": {
+        "type": "String"
+      },
+      "disabled": {
+        "type": "Boolean",
+        "values": [
+          "true",
+          "false"
+        ]
+      },
+      "id": {
+        "type": "String"
+      },
+      "immediate": {
+        "type": "Boolean",
+        "values": [
+          "true",
+          "false"
+        ]
+      },
+      "label": {
+        "type": "String"
+      },
+      "lang": {
+        "type": "String"
+      },
+      "onblur": {
+        "type": "String"
+      },
+      "onchange": {
+        "type": "String"
+      },
+      "onclick": {
+        "type": "String"
+      },
+      "ondblclick": {
+        "type": "String"
+      },
+      "onfocus": {
+        "type": "String"
+      },
+      "onkeydown": {
+        "type": "String"
+      },
+      "onkeypress": {
+        "type": "String"
+      },
+      "onkeyup": {
+        "type": "String"
+      },
+      "onmousedown": {
+        "type": "String"
+      },
+      "onmousemove": {
+        "type": "String"
+      },
+      "onmouseout": {
+        "type": "String"
+      },
+      "onmouseover": {
+        "type": "String"
+      },
+      "onmouseup": {
+        "type": "String"
+      },
+      "onselect": {
+        "type": "String"
+      },
+      "rendered": {
+        "type": "Boolean",
+        "values": [
+          "true",
+          "false"
+        ]
+      },
+      "required": {
+        "type": "Boolean",
+        "values": [
+          "true",
+          "false"
+        ]
+      },
+      "selected": {
+        "type": "Boolean",
+        "values": [
+          "true",
+          "false"
+        ]
+      },
+      "style": {
+        "type": "String"
+      },
+      "styleClass": {
+        "type": "String"
+      },
+      "tabindex": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      },
+      "type":{
+        "type": "String",
+        "values": [
+          "auto",
+          "date",
+          "datetime",
+          "datetime-local",
+          "month",
+          "week",
+          "time",
+          "email",
+          "number",
+          "range",
+          "search",
+          "tel",
+          "text",
+          "url"
+        ]
+      },
+      "value": {
+        "type": "Object"
+      }
+    }
+  },
   "apex:inputCheckbox": {
+    "documentation": "An HTML input element of type checkbox. Use this component to get user input for a controller method that does not correspond to a field on a Salesforce object.\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated <input> tag.",
     "simple": true,
     "attribs": {
       "accesskey": {
@@ -1938,6 +2103,7 @@ export let definition = {
     }
   },
   "apex:inputField": {
+    "documentation": "An HTML input element for a value that corresponds to a field on a Salesforce object. The <apex:inputField> component respects the attributes of the associated field, including whether the field is required or unique, and the user interface widget to display to get input from the user. For example, if the specified <apex:inputField> component is a date field, a calendar input widget is displayed. When used in an <apex:pageBlockSection>, <apex:inputField> tags automatically display with their corresponding output label.\n\nConsider the following when using DOM events with this tag:\nFor lookup fields, mouse events fire on both the text box and graphic icon.\nFor multi-select picklists, all events fire, but the DOM ID is suffixed with _unselected for the left box, _selected for the right box, and _right_arrow and _left_arrow for the graphic icons.\nFor rich text areas, no events fire.\nNote:\nRead-only fields, and fields for certain Salesforce objects with complex automatic behavior, such as Event.StartDateTime and Event.EndDateTime, don't render as editable when using <apex:inputField>. Use a different input component such as <apex:inputText> instead.\nAn <apex:inputField> component for a rich text area field can't be used for image uploads in Site.com sites or Force.com Sites due to security constraints. If you want to enable users to upload image files in either of those contexts, use an <apex:inputFile> component.\nIf custom help is defined for the field in Setup, the field must be a child of an <apex:pageBlock> or <apex:pageBlockSectionItem>, and the Salesforce page header must be displayed for the custom help to appear on your Visualforce page. To override the display of custom help, use the <apex:inputField> in the body of an <apex:pageBlockSectionItem>.",
     "simple": true,
     "attribs": {
       "id": {
@@ -2017,6 +2183,7 @@ export let definition = {
     }
   },
   "apex:inputFile": {
+    "documentation": "A component that creates an input field to upload a file. \n Note: The maximum file size that can be uploaded via Visualforce is 10 MB.",
     "simple": false,
     "attribs": {
       "accept": {
@@ -2120,6 +2287,7 @@ export let definition = {
     }
   },
   "apex:inputHidden": {
+    "documentation": "An HTML input element of type hidden, that is, an input element that is invisible to the user. Use this component to pass variables from page to page.\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated <input> tag.",
     "simple": true,
     "attribs": {
       "id": {
@@ -2152,6 +2320,7 @@ export let definition = {
     }
   },
   "apex:inputSecret": {
+    "documentation": "An HTML input element of type password. Use this component to get user input for a controller method that does not correspond to a field on a Salesforce object, for a value that is masked as the user types.\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated <input> tag.",
     "simple": true,
     "attribs": {
       "accesskey": {
@@ -2280,6 +2449,7 @@ export let definition = {
     }
   },
   "apex:inputText": {
+    "documentation": "An HTML input element of type text. Use this component to get user input for a controller method that does not correspond to a field on a Salesforce object.\n\nThis component doesn't use Salesforce styling. Also, since it doesn't correspond to a field, or any other data on an object, custom code is required to use the value the user enters.\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated <input> tag.",
     "simple": true,
     "attribs": {
       "accesskey": {
@@ -2384,6 +2554,7 @@ export let definition = {
     }
   },
   "apex:inputTextarea": {
+    "documentation": "A text area input element. Use this component to get user input for a controller method that does not correspond to a field on a Salesforce object, for a value that requires a text area.\n\nThis component supports HTML pass-through attributes using the \"html-\" prefix. Pass-through attributes are attached to the generated <textarea> tag.",
     "simple": true,
     "attribs": {
       "accesskey": {
@@ -2502,6 +2673,7 @@ export let definition = {
     }
   },
   "apex:insert": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "name": {
@@ -2510,6 +2682,7 @@ export let definition = {
     }
   },
   "apex:legend": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "font": {
@@ -2543,6 +2716,7 @@ export let definition = {
     }
   },
   "apex:lineSeries": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "axis": {
@@ -2632,6 +2806,7 @@ export let definition = {
     }
   },
   "apex:listViews": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "id": {
@@ -2650,6 +2825,7 @@ export let definition = {
     }
   },
   "apex:message": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "dir": {
@@ -2683,6 +2859,7 @@ export let definition = {
     }
   },
   "apex:messages": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "dir": {
@@ -2723,6 +2900,7 @@ export let definition = {
     }
   },
   "apex:outputField": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "dir": {
@@ -2759,6 +2937,7 @@ export let definition = {
     }
   },
   "apex:outputLabel": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "accesskey": {
@@ -2844,6 +3023,7 @@ export let definition = {
     }
   },
   "apex:outputLink": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "accesskey": {
@@ -2950,6 +3130,7 @@ export let definition = {
     }
   },
   "apex:outputPanel": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "dir": {
@@ -3013,6 +3194,7 @@ export let definition = {
     }
   },
   "apex:outputText": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "dir": {
@@ -3056,6 +3238,7 @@ export let definition = {
     }
   },
   "apex:page": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "action": {
@@ -3199,6 +3382,7 @@ export let definition = {
     }
   },
   "apex:pageBlock": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "dir": {
@@ -3265,6 +3449,7 @@ export let definition = {
     }
   },
   "apex:pageBlockButtons": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "dir": {
@@ -3328,6 +3513,7 @@ export let definition = {
     }
   },
   "apex:pageBlockSection": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "collapsible": {
@@ -3399,6 +3585,7 @@ export let definition = {
     }
   },
   "apex:pageBlockSectionItem": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "dataStyle": {
@@ -3501,6 +3688,7 @@ export let definition = {
     }
   },
   "apex:pageBlockTable": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "align": {
@@ -3642,6 +3830,7 @@ export let definition = {
     }
   },
   "apex:pageMessage": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "detail": {
@@ -3679,6 +3868,7 @@ export let definition = {
     }
   },
   "apex:pageMessages": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "escape": {
@@ -3708,6 +3898,7 @@ export let definition = {
     }
   },
   "apex:panelBar": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "contentClass": {
@@ -3765,6 +3956,7 @@ export let definition = {
     }
   },
   "apex:panelBarItem": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "contentClass": {
@@ -3813,6 +4005,7 @@ export let definition = {
     }
   },
   "apex:panelGrid": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "bgcolor": {
@@ -3918,6 +4111,7 @@ export let definition = {
     }
   },
   "apex:panelGroup": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -3942,6 +4136,7 @@ export let definition = {
     }
   },
   "apex:param": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "assignTo": {
@@ -3959,6 +4154,7 @@ export let definition = {
     }
   },
   "apex:pieSeries": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "colorSet": {
@@ -4010,6 +4206,7 @@ export let definition = {
     }
   },
   "apex:radarSeries": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "fill": {
@@ -4080,6 +4277,7 @@ export let definition = {
     }
   },
   "apex:relatedList": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "id": {
@@ -4107,6 +4305,7 @@ export let definition = {
     }
   },
   "apex:remoteObjectField": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "id": {
@@ -4128,6 +4327,7 @@ export let definition = {
     }
   },
   "apex:remoteObjectModel": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "create": {
@@ -4164,6 +4364,7 @@ export let definition = {
     }
   },
   "apex:remoteObjects": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "create": {
@@ -4194,6 +4395,7 @@ export let definition = {
     }
   },
   "apex:repeat": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "first": {
@@ -4221,6 +4423,7 @@ export let definition = {
     }
   },
   "apex:scatterSeries": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "axis": {
@@ -4285,6 +4488,7 @@ export let definition = {
     }
   },
   "apex:scontrol": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "controlName": {
@@ -4319,6 +4523,7 @@ export let definition = {
     }
   },
   "apex:sectionHeader": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "description": {
@@ -4349,6 +4554,7 @@ export let definition = {
     }
   },
   "apex:selectCheckboxes": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "accesskey": {
@@ -4473,6 +4679,7 @@ export let definition = {
     }
   },
   "apex:selectList": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "accesskey": {
@@ -4594,6 +4801,7 @@ export let definition = {
     }
   },
   "apex:selectOption": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "dir": {
@@ -4674,6 +4882,7 @@ export let definition = {
     }
   },
   "apex:selectOptions": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -4692,6 +4901,7 @@ export let definition = {
     }
   },
   "apex:selectRadio": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "accesskey": {
@@ -4816,6 +5026,7 @@ export let definition = {
     }
   },
   "apex:stylesheet": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "id": {
@@ -4827,6 +5038,7 @@ export let definition = {
     }
   },
   "apex:tab": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "disabled": {
@@ -4928,6 +5140,7 @@ export let definition = {
     }
   },
   "apex:tabPanel": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "activeTabClass": {
@@ -5040,6 +5253,7 @@ export let definition = {
     }
   },
   "apex:toolbar": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "contentClass": {
@@ -5139,6 +5353,7 @@ export let definition = {
     }
   },
   "apex:toolbarGroup": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -5199,6 +5414,7 @@ export let definition = {
     }
   },
   "apex:variable": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "id": {
@@ -5220,6 +5436,7 @@ export let definition = {
     }
   },
   "apex:vote": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -5241,6 +5458,7 @@ export let definition = {
     }
   },
   "c:sitefooter": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -5256,6 +5474,7 @@ export let definition = {
     }
   },
   "c:siteheader": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -5271,6 +5490,7 @@ export let definition = {
     }
   },
   "c:sitelogin": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -5286,6 +5506,7 @@ export let definition = {
     }
   },
   "c:sitepoweredby": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -5301,6 +5522,7 @@ export let definition = {
     }
   },
   "chatter:feed": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "entityId": {
@@ -5335,6 +5557,7 @@ export let definition = {
     }
   },
   "chatter:feedWithFollowers": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "entityId": {
@@ -5366,6 +5589,7 @@ export let definition = {
     }
   },
   "chatter:follow": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "entityId": {
@@ -5390,6 +5614,7 @@ export let definition = {
     }
   },
   "chatter:followers": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "entityId": {
@@ -5408,6 +5633,7 @@ export let definition = {
     }
   },
   "chatter:newsfeed": {
+    "documentation": "",
     "simple": true,
     "attribs": {
       "id": {
@@ -5429,6 +5655,7 @@ export let definition = {
     }
   },
   "chatter:userPhotoUpload": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -5451,6 +5678,7 @@ export let definition = {
     }
   },
   "flow:interview": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "buttonLocation": {
@@ -5496,6 +5724,7 @@ export let definition = {
     }
   },
   "ideas:detailOutputLink": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -5529,6 +5758,7 @@ export let definition = {
     }
   },
   "ideas:listOutputLink": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "category": {
@@ -5578,6 +5808,7 @@ export let definition = {
     }
   },
   "ideas:profileListOutputLink": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "communityId": {
@@ -5624,6 +5855,7 @@ export let definition = {
     }
   },
   "site:googleAnalyticsTracking": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -5639,6 +5871,7 @@ export let definition = {
     }
   },
   "site:previewAsAdmin": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "id": {
@@ -5654,6 +5887,7 @@ export let definition = {
     }
   },
   "social:profileViewer": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "entityId": {
@@ -5672,6 +5906,7 @@ export let definition = {
     }
   },
   "support:clickToDial": {
+    "documentation": "",
     "simple": false,
     "attribs": {
       "entityId": {
