@@ -2,7 +2,7 @@
     "name": "apex-autocomplete",
     "displayName": "Salesforce Auto-Complete",
     "description": "Adds Auto-Completion for Salesforce Apex & Visualforce",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "publisher": "chuckjonas",
     "engines": {
         "vscode": "^1.5.0"
@@ -25,6 +25,28 @@
     "categories": [
         "Languages"
     ],
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Salesforce Auto-Complete",
+            "properties": {
+                "apexAutoComplete.userName": {
+                    "type": "string",
+                    "default": "",
+                    "description": "SF User Name"
+                },
+                "apexAutoComplete.password": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Password + Security Token"
+                },"apexAutoComplete.instanceUrl": {
+                    "type": "string",
+                    "default": "https://test.salesforce.com",
+                    "description": "Login Url"
+                }
+            }
+        }
+    },
     "activationEvents": [
         "*"
     ],

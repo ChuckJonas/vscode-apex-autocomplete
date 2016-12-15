@@ -7,11 +7,19 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 	private jarPath: string;
 	private responseFile: string;
 	private tempFolder: string;
+	private userName: string;
+	private password: string;
+	private instanceUrl: string;
 
 	public constructor(jarPath: string, responseFile: string, tempFolder: string){
 		this.jarPath = jarPath;
 		this.responseFile = responseFile;
 		this.tempFolder = tempFolder;
+
+		let config = vscode.workspace.getConfiguration('apexAutoComplete');
+		this.userName = config.get('userName') as string;
+		this.password = config.get('password') as string;
+		this.instanceUrl = config.get('instanceUrl') as string;
 
 		this.runServer();
 	}
@@ -51,7 +59,12 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 				});
 
 				client.connect(65000, '127.0.0.1',() => {
-					let cmd = `--action=listCompletions --currentFilePath='${path}' --currentFileContentPath='${tempFile}'  --line=${position.line+1} --column=${position.character+1} --responseFilePath='${this.responseFile}' --projectPath='${workspace}' --pollWaitMillis=1000 --maxPollRequests=1000 \n`;
+					let cmd = `--action=listCompletions --currentFilePath='${path}' --currentFileContentPath='${tempFile}'  --line=${position.line+1} --column=${position.character+1} --responseFilePath='${this.responseFile}' --projectPath='${workspace}' --pollWaitMillis=1000 --maxPollRequests=1000`;
+					if(this.userName && this.password && this.instanceUrl){
+						cmd += ` --sf.username=${this.userName} --sf.password=${this.password} --sf.serverurl=${this.instanceUrl}`
+					}
+					cmd +='\n';
+					console.log(cmd);
 					client.write(cmd);
 				});
 
