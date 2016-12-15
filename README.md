@@ -12,9 +12,6 @@ Currently provides auto-complete on the following:
 * Class methods & properties
 * Annotations
 * Visualforce tags & Attributes (beta)
-
-Possible future completions:
-
 * SObject fields
 * SOQL Queries
 
@@ -22,6 +19,23 @@ Possible future completions:
 
 * `src` folder must be in root of workspace
 * Java runtime installed an on path
+
+## Configuration
+
+Apex Class & VisualForce completions should work "out of the box".
+
+To get completions on SObject & SOQL Queries, you must add org creditionals to your workspace settings:
+
+```json
+     // SF User Name
+    "apexAutoComplete.userName": "johnDoe@example.com",
+
+    // Password + Security Token
+    "apexAutoComplete.password": "abc123456789",
+
+    // Login Url
+    "apexAutoComplete.instanceUrl": "https://test.salesforce.com",
+```
 
 ## Known Issues
 
