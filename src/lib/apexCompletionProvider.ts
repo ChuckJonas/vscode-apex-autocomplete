@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
+import * as path from 'path';
 import * as net from 'net';
 import * as child_process from 'child_process';
 
@@ -35,9 +36,9 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 	 */
 	public provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): Thenable<vscode.CompletionItem[]>{
 
-		let path = document.fileName;
+		let currentFile = document.fileName;
 		let workspace = vscode.workspace.rootPath;
-		let tempFile = this.tempFolder + '/tmp.cls';
+		let tempFile = path.join(this.tempFolder, 'tmp.cls');
 		let respFile = this.responseFile;
 
 		return new Promise(
@@ -59,7 +60,7 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 				});
 
 				client.connect(65000, '127.0.0.1',() => {
-					let cmd = `--action=listCompletions --currentFilePath='${path}' --currentFileContentPath='${tempFile}'  --line=${position.line+1} --column=${position.character+1} --responseFilePath='${this.responseFile}' --projectPath='${workspace}' --pollWaitMillis=1000 --maxPollRequests=1000`;
+					let cmd = `--action=listCompletions --currentFilePath='${currentFile}' --currentFileContentPath='${tempFile}'  --line=${position.line+1} --column=${position.character+1} --responseFilePath='${this.responseFile}' --projectPath='${workspace}' --pollWaitMillis=1000 --maxPollRequests=1000`;
 					if(this.userName && this.password && this.instanceUrl){
 						cmd += ` --sf.username=${this.userName} --sf.password=${this.password} --sf.serverurl=${this.instanceUrl}`
 					}
@@ -84,7 +85,7 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 						reject(err);
 					}
 					console.log(data);
-					let cleanData = data.replace('RESULT=SUCCESS\n','');
+					let cleanData = data.replace('RESULT=SUCCESS','');
 					let parts = cleanData.split('\n');
 					let completions = new Array<vscode.CompletionItem>();
 					for(let i = 0; i < parts.length; i++){
