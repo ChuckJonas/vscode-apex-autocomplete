@@ -2,7 +2,7 @@
     "name": "apex-autocomplete",
     "displayName": "Salesforce Auto-Complete",
     "description": "Adds Auto-Completion for Salesforce Apex & Visualforce",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "publisher": "chuckjonas",
     "engines": {
         "vscode": "^1.5.0"
@@ -26,6 +26,29 @@
         "Languages"
     ],
     "contributes": {
+        "languages": [
+            {
+                "id": "apex",
+                "extensions": [
+                    ".cls",
+                    ".trigger"
+                ],
+                "aliases": [
+                    "Apex"
+                ]
+            },
+            {
+                "id": "visualforce",
+                "extensions": [
+                    ".component",
+                    ".page"
+                ],
+                "aliases": [
+                    "Visualforce"
+                ]
+            }
+        ],
+
         "configuration": {
             "type": "object",
             "title": "Salesforce Auto-Complete",
