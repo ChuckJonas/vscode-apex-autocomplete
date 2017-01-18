@@ -1,3 +1,7 @@
+# 0.1.10
+
+Improved SObject field Completions
+
 # 0.1.8
 
 Added Support for windows
