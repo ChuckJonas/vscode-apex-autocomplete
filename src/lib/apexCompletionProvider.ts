@@ -125,11 +125,11 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 			insertText = obj.identity;
 			kind = vscode.CompletionItemKind.Value;
 			documentation = obj.doc;
-		}else if(!obj.signature.startsWith('private') && !obj.signature.startsWith('public') && !obj.signature.startsWith('global') && !obj.signature.startsWith('protected')){
-			label = obj.signature;
+		}else if(!obj.signature.startsWith('private') && !obj.signature.startsWith('public') && !obj.signature.startsWith('global') && !obj.signature.startsWith('protected') && !obj.signature.startsWith('static')){
+			label = obj.identity;
 			insertText = obj.identity;
 			kind = vscode.CompletionItemKind.Field;
-			documentation = obj.doc;
+			documentation = `${obj.signature}: ${obj.doc}`;
 		}else{ //method or prop
 			obj.signature = obj.signature.replace('( ', '(');
 			if(obj.doc){
