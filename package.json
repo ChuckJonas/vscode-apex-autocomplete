@@ -1,7 +1,7 @@
 {
     "name": "apex-autocomplete",
-    "displayName": "Salesforce Auto-Complete",
-    "description": "Adds Auto-Completion for Salesforce Apex & Visualforce",
+    "displayName": "Salesforce Auto-Complete +",
+    "description": "Adds Auto-Completion (and more!) for Salesforce Apex & Visualforce",
     "version": "0.2.0",
     "publisher": "chuckjonas",
     "engines": {

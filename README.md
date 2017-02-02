@@ -1,10 +1,14 @@
-# Apex Auto-complete
+# Apex Auto-complete +
 
-This extension provides some level of auto-complete for the salesforce apex programming language.
-
-This is pretty much just a container for the autocomplete functionality from the [tooling-force.com](https://github.com/neowit/tooling-force.com) library by [Andrey Gavrikov](https://github.com/neowit).
+This extension provides code completion and other language services for the salesforce apex programming language.
 
 ## Features
+
+### Code Completion
+
+![Code Completion](https://raw.githubusercontent.com/ChuckJonas/vscode-apex-autocomplete/master/images/code-completion.gif)
+
+![SOQL Completion](https://raw.githubusercontent.com/ChuckJonas/vscode-apex-autocomplete/master/images/soql-complete.gif)
 
 Currently provides auto-complete on the following:
 
@@ -12,8 +16,19 @@ Currently provides auto-complete on the following:
 * Class methods & properties
 * Annotations
 * Visualforce tags & Attributes (beta)
-* SObject fields
-* SOQL Queries
+* SObject fields (requires auth)
+* SOQL Queries   (requires auth)
+
+
+### Go-to/Peak Definition
+
+![Go To Definitions](https://raw.githubusercontent.com/ChuckJonas/vscode-apex-autocomplete/master/images/go-to-def.gif)
+
+Quickly navigate to variable, function & class declarations
+
+### Syntax checking
+
+Save time by spotting grammatical errors before sending code up to salesforce to compile.
 
 ## Requirements
 
@@ -35,7 +50,12 @@ To get completions on SObject & SOQL Queries, you must add org creditionals to y
 
     // Login Url
     "apexAutoComplete.instanceUrl": "https://test.salesforce.com",
+
+    // enables grammatic syntax checking on document change
+    "apexAutoComplete.checkSyntax": "true",
 ```
+
+Please reload after updating settings!
 
 ## Known Issues
 
@@ -43,6 +63,8 @@ After running a completion for the first time, a folder called `.vim-foce.com` w
 This is a side effect of the current version of `tooling-force.com`.
 
 ## Legal
+
+This is pretty much just a container for the autocomplete functionality from the [tooling-force.com](https://github.com/neowit/tooling-force.com) library by [Andrey Gavrikov](https://github.com/neowit).
 
 Third-Party Licenses:
 
