@@ -1,4 +1,4 @@
 out
 node_modules
-bin/tmp.cls
-bin/response.json
+bin/*.cls
+bin/*.json

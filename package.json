@@ -2,7 +2,7 @@
     "name": "apex-autocomplete",
     "displayName": "Salesforce Auto-Complete",
     "description": "Adds Auto-Completion for Salesforce Apex & Visualforce",
-    "version": "0.1.11",
+    "version": "0.2.0",
     "publisher": "chuckjonas",
     "engines": {
         "vscode": "^1.5.0"
@@ -62,10 +62,16 @@
                     "type": "string",
                     "default": "",
                     "description": "Password + Security Token"
-                },"apexAutoComplete.instanceUrl": {
+                },
+                "apexAutoComplete.instanceUrl": {
                     "type": "string",
                     "default": "https://test.salesforce.com",
                     "description": "Login Url"
+                },
+                "apexAutoComplete.checkSyntax": {
+                    "type": "boolean",
+                    "default": "true",
+                    "description": "Checks code for grammar errors"
                 }
             }
         }

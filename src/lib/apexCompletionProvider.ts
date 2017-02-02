@@ -1,30 +1,12 @@
 import * as vscode from 'vscode';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as net from 'net';
-import * as child_process from 'child_process';
-
+import {ApexToolingService} from './apexToolingService';
 export class ApexCompletionItemProvider implements vscode.CompletionItemProvider{
-	private jarPath: string;
-	private responseFile: string;
-	private tempFolder: string;
-	private userName: string;
-	private password: string;
-	private instanceUrl: string;
 
-	public constructor(jarPath: string, responseFile: string, tempFolder: string){
-		this.jarPath = jarPath;
-		this.responseFile = responseFile;
-		this.tempFolder = tempFolder;
-
-		let config = vscode.workspace.getConfiguration('apexAutoComplete');
-		this.userName = config.get('userName') as string;
-		this.password = config.get('password') as string;
-		this.instanceUrl = config.get('instanceUrl') as string;
-
-		this.runServer();
+	private toolingService;
+	public constructor(toolingService: ApexToolingService){
+		this.toolingService = toolingService;
 	}
-
+j
 	/**
 	 * Provide completion items for the given position and document.
 	 *
@@ -36,82 +18,26 @@ export class ApexCompletionItemProvider implements vscode.CompletionItemProvider
 	 */
 	public provideCompletionItems(document: vscode.TextDocument, position: vscode.Position, token: vscode.CancellationToken): Thenable<vscode.CompletionItem[]>{
 
-		let currentFile = document.fileName;
-		let workspace = vscode.workspace.rootPath;
-		let tempFile = path.join(this.tempFolder, 'tmp.cls');
-		let respFile = this.responseFile;
-
-		return new Promise(
-			(resolve, reject)=>{
-				fs.writeFile(tempFile, document.getText(), function(err) {
-					if (err){
-						reject(err);
-					}
-					else resolve();
-				});
-		})
-		.then(() => {
+		return this.toolingService.listCompletions(document, position)
+		.then((data: string) => {
 			return new Promise((resolve, reject) => {
-				let client = new net.Socket();
-				client.once('data',(data) => {
-  					console.log(data.toString());
-					client.destroy();
-					resolve();
-				});
-
-				client.connect(65000, '127.0.0.1',() => {
-					let cmd = `--action=listCompletions --currentFilePath='${currentFile}' --currentFileContentPath='${tempFile}'  --line=${position.line+1} --column=${position.character+1} --responseFilePath='${this.responseFile}' --projectPath='${workspace}' --pollWaitMillis=1000 --maxPollRequests=1000`;
-					if(this.userName && this.password && this.instanceUrl){
-						cmd += ` --sf.username=${this.userName} --sf.password=${this.password} --sf.serverurl=${this.instanceUrl}`
+				console.log(data);
+				let cleanData = data.replace('RESULT=SUCCESS','');
+				let parts = cleanData.split('\n');
+				let completions = new Array<vscode.CompletionItem>();
+				for(let i = 0; i < parts.length; i++){
+					try{
+						let obj = JSON.parse(parts[i]) as CompletionResult;
+						let completion = this.createCompletion(obj);
+						completions.push(completion);
+					}catch(e){
+						console.log(e);
 					}
-					cmd +='\n';
-					console.log(cmd);
-					client.write(cmd);
-				});
-
-				client.on('error', (err: any) => {
-					if(err.code == 'ECONNREFUSED'){
-						//if we get this error, try to kick off server again
-						this.runServer();
-					}else{
-						console.log("Error: " + err.message);
-					}
-				});
-			});
-		}).then(() => {
-			return new Promise((resolve, reject) => {
-				fs.readFile(respFile, 'utf8', (err, data) => {
-					if (err){
-						reject(err);
-					}
-					console.log(data);
-					let cleanData = data.replace('RESULT=SUCCESS','');
-					let parts = cleanData.split('\n');
-					let completions = new Array<vscode.CompletionItem>();
-					for(let i = 0; i < parts.length; i++){
-						try{
-							let obj = JSON.parse(parts[i]) as CompletionResult;
-							let completion = this.createCompletion(obj);
-							completions.push(completion);
-						}catch(e){
-							console.log(e);
-						}
-					}
-					resolve(completions);
-				});
+				}
+				resolve(completions);
 			});
 		});
 
-	}
-
-	//starts the completion server.  Server will only run once for all projects
-	private runServer(){
-		let cmd = `java -Dfile.encoding=UTF-8  -jar ${this.jarPath} --action=serverStart --port=65000 --timeoutSec=1800`;
-
-    	let child = child_process.exec(cmd);
-		child.stderr.on('data', function(data) {
-			console.log('stdout: ' + data);
-		});
 	}
 
 	private createCompletion(obj: CompletionResult): vscode.CompletionItem{
