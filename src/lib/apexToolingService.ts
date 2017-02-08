@@ -8,9 +8,9 @@ import * as child_process from 'child_process';
 const BIN = 'bin';
 const JAR = 'tooling-force.jar';
 export class ApexToolingService{
+    public tempFolder: string;
 
     private jarPath: string;
-    private tempFolder: string;
     private userName: string;
 	private password: string;
 	private instanceUrl: string;
@@ -58,17 +58,24 @@ export class ApexToolingService{
     }
 
     public findSymbol(document: vscode.TextDocument, position: vscode.Position){
+        let tmpFile = this.getTempPath('findSymbolTmp.cls');
         let resultFile = this.getTempPath('findSymbolResult.json');
 
-        return this.sendCommand('findSymbol',
-            resultFile,
-            new Map<String,String>([
-                ['currentFilePath', document.fileName],
-                ['currentFileContentPath', document.fileName],
-                ['line', (position.line+1).toString()],
-                ['column', (position.character+1).toString()]
-            ])
-        )
+        return new Promise(
+            this.writecurrentFileContent(tmpFile, document)
+        ).then(
+            () => {
+                return this.sendCommand('findSymbol',
+                resultFile,
+                new Map<String,String>([
+                    ['currentFilePath', document.fileName],
+                    ['currentFileContentPath', tmpFile],
+                    ['line', (position.line+1).toString()],
+                    ['column', (position.character+1).toString()]
+                ])
+                )
+            }
+        );
     }
 
     public checkSyntax(document: vscode.TextDocument){

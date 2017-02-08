@@ -1,3 +1,6 @@
+# 0.2.1
+* Fixed bug with go-to definition not working on modified files
+
 # 0.2.0
 
 * Added Go-To Definition and Peek Definition functionality

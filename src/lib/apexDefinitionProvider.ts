@@ -24,7 +24,9 @@ export class ApexDefinitionProvider implements vscode.DefinitionProvider{
                 try {
                     let cleanData = data.replace('RESULT=SUCCESS','');
                     let obj = JSON.parse(cleanData)[0];
-                    let parts = cleanData.split('\n');
+                    if (obj.filePath.indexOf(this.toolingService.tempFolder) >= 0){
+                        obj.filePath = document.fileName;
+                    }
                     let def = new vscode.Location(vscode.Uri.parse('file://'+obj.filePath), new vscode.Range(obj.line-1, obj.column,obj.line,obj.column));
                     resolve(def);
                 }catch(e) {
