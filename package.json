@@ -1,94 +1,96 @@
 {
-    "name": "apex-autocomplete",
-    "displayName": "Salesforce Auto-Complete +",
-    "description": "Adds Auto-Completion (and more!) for Salesforce Apex & Visualforce",
-    "version": "0.2.1",
-    "publisher": "chuckjonas",
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/ChuckJonas/vscode-apex-autocomplete.git"
-    },
-    "icon": "images/apex-complete-icon.svg",
-    "bugs": {
-        "url": "https://github.com/ChuckJonas/vscode-apex-autocomplete/issues"
-    },
-    "keywords": [
-        "Apex",
-        "VisualForce",
-        "IntelliSense",
-        "Salesforce",
-        "Code Completion"
-    ],
-    "categories": [
-        "Languages"
-    ],
-    "contributes": {
-        "languages": [
-            {
-                "id": "apex",
-                "extensions": [
-                    ".cls",
-                    ".trigger"
-                ],
-                "aliases": [
-                    "Apex"
-                ]
-            },
-            {
-                "id": "visualforce",
-                "extensions": [
-                    ".component",
-                    ".page"
-                ],
-                "aliases": [
-                    "Visualforce"
-                ]
-            }
+  "name": "apex-autocomplete",
+  "displayName": "Salesforce Auto-Complete +",
+  "description": "Adds Auto-Completion (and more!) for Salesforce Apex & Visualforce",
+  "version": "0.2.4",
+  "publisher": "chuckjonas",
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChuckJonas/vscode-apex-autocomplete.git"
+  },
+  "icon": "images/apex-complete-icon.svg",
+  "bugs": {
+    "url": "https://github.com/ChuckJonas/vscode-apex-autocomplete/issues"
+  },
+  "keywords": [
+    "Apex",
+    "VisualForce",
+    "IntelliSense",
+    "Salesforce",
+    "Code Completion"
+  ],
+  "categories": [
+    "Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "apex",
+        "extensions": [
+          ".cls",
+          ".trigger"
         ],
-
-        "configuration": {
-            "type": "object",
-            "title": "Salesforce Auto-Complete",
-            "properties": {
-                "apexAutoComplete.userName": {
-                    "type": "string",
-                    "default": "",
-                    "description": "SF User Name"
-                },
-                "apexAutoComplete.password": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Password + Security Token"
-                },
-                "apexAutoComplete.instanceUrl": {
-                    "type": "string",
-                    "default": "https://test.salesforce.com",
-                    "description": "Login Url"
-                },
-                "apexAutoComplete.checkSyntax": {
-                    "type": "boolean",
-                    "default": "true",
-                    "description": "Checks code for grammar errors"
-                }
-            }
-        }
-    },
-    "activationEvents": [
-        "*"
+        "aliases": [
+          "Apex"
+        ]
+      },
+      {
+        "id": "visualforce",
+        "extensions": [
+          ".component",
+          ".page"
+        ],
+        "aliases": [
+          "Visualforce"
+        ]
+      }
     ],
-    "main": "./out/src/extension",
-    "scripts": {
-        "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install"
-    },
-    "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
+    "configuration": {
+      "type": "object",
+      "title": "Salesforce Auto-Complete",
+      "properties": {
+        "apexAutoComplete.userName": {
+          "type": "string",
+          "default": "",
+          "description": "SF User Name"
+        },
+        "apexAutoComplete.password": {
+          "type": "string",
+          "default": "",
+          "description": "Password + Security Token"
+        },
+        "apexAutoComplete.instanceUrl": {
+          "type": "string",
+          "default": "https://test.salesforce.com",
+          "description": "Login Url"
+        },
+        "apexAutoComplete.checkSyntax": {
+          "type": "boolean",
+          "default": "true",
+          "description": "Checks code for grammar errors"
+        }
+      }
     }
+  },
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/src/extension",
+  "scripts": {
+    "compile": "tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.0",
+    "mocha": "^2.3.3",
+    "@types/node": "^6.0.40",
+    "@types/mocha": "^2.2.32"
+  },
+  "dependencies": {
+    "request": "^2.79.0"
+  }
 }

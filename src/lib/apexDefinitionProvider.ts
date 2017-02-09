@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import {ApexToolingService} from './apexToolingService';
-
+import * as path from 'path';
 export class ApexDefinitionProvider implements vscode.DefinitionProvider{
 
     private toolingService;
@@ -27,7 +27,7 @@ export class ApexDefinitionProvider implements vscode.DefinitionProvider{
                     if (obj.filePath.indexOf(this.toolingService.tempFolder) >= 0){
                         obj.filePath = document.fileName;
                     }
-                    let def = new vscode.Location(vscode.Uri.parse('file://'+obj.filePath), new vscode.Range(obj.line-1, obj.column,obj.line,obj.column));
+                    let def = new vscode.Location(vscode.Uri.parse(path.normalize('file:' + obj.filePath)), new vscode.Range(obj.line-1, obj.column,obj.line,obj.column));
                     resolve(def);
                 }catch(e) {
                     reject(e)
