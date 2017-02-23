@@ -33,7 +33,8 @@ export function activate(context: vscode.ExtensionContext) {
     let config = vscode.workspace.getConfiguration('apexAutoComplete');
     if(config.get('checkSyntax') as boolean){
         const collection = vscode.languages.createDiagnosticCollection('apex-syntax');
-        let syntax = new ApexSyntax(toolingService,collection);
+        let delay = config.get('checkSyntaxDelay') as number;
+        let syntax = new ApexSyntax(toolingService, collection, delay);
         //register onchange
         vscode.workspace.onDidChangeTextDocument((changeEvent) => {
             if(changeEvent.document.languageId == 'apex'){

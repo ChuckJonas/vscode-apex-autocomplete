@@ -33,7 +33,7 @@ Save time by spotting grammatical errors before sending code up to salesforce to
 ## Requirements
 
 * `src` folder must be in root of workspace
-* Java runtime installed an on path
+* Java (`>1.8`) runtime installed an on path
 
 ## Configuration
 
@@ -53,6 +53,9 @@ To get completions on SObject & SOQL Queries, you must add org creditionals to y
 
     // enables grammatic syntax checking on document change
     "apexAutoComplete.checkSyntax": "true",
+
+    // if check sytanx is enable, how long to wait after typing
+    "apexAutoComplete.checkSyntaxDelay": 400,
 ```
 
 Please reload after updating settings!

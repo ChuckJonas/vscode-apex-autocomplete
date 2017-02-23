@@ -112,7 +112,7 @@ export class ApexToolingService{
                     }
 
 					if(this.userName && this.password && this.instanceUrl){
-						cmd += ` --sf.username=${this.userName} --sf.password=${this.password} --sf.serverurl=${this.instanceUrl}`
+						cmd += ` --sf.username='${this.userName}' --sf.password='${this.password}' --sf.serverurl='${this.instanceUrl}'`
 					}
 					cmd +='\n';
 					console.log(cmd);

@@ -2,7 +2,7 @@
   "name": "apex-autocomplete",
   "displayName": "Salesforce Auto-Complete +",
   "description": "Adds Auto-Completion (and more!) for Salesforce Apex & Visualforce",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "publisher": "chuckjonas",
   "engines": {
     "vscode": "^1.5.0"
@@ -71,6 +71,11 @@
           "type": "boolean",
           "default": "true",
           "description": "Checks code for grammar errors"
+        },
+        "apexAutoComplete.checkSyntaxDelay": {
+            "type": "number",
+            "default": "400",
+            "description": "If Check syntax is enabled, determines how long to wait after typing to run."
         }
       }
     }
