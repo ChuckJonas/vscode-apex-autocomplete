@@ -9,8 +9,16 @@ import {ApexSyntax} from './lib/syntaxCheck';
 
 export function activate(context: vscode.ExtensionContext) {
 
-    let toolingService = new ApexToolingService(context);
+    const outputChannel = vscode.window.createOutputChannel('Apex Autocomplete +');
+    let toolingService = new ApexToolingService(context, outputChannel);
     toolingService.startService();
+
+    //setup commands
+    context.subscriptions.push(
+         vscode.commands.registerCommand('apex-autocomplete.showOutput', () => {
+            outputChannel.show();
+        })
+    );
 
     vscode.languages.registerCompletionItemProvider(
         'apex',

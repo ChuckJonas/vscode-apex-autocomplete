@@ -2,7 +2,7 @@
   "name": "apex-autocomplete",
   "displayName": "Salesforce Auto-Complete +",
   "description": "Adds Auto-Completion (and more!) for Salesforce Apex & Visualforce",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "publisher": "chuckjonas",
   "engines": {
     "vscode": "^1.5.0"
@@ -26,6 +26,12 @@
     "Languages"
   ],
   "contributes": {
+    "commands": [
+      {
+        "command": "apex-autocomplete.showOutput",
+        "title": "Show Apex Autocomplete Debug Output"
+      }
+    ],
     "languages": [
       {
         "id": "apex",

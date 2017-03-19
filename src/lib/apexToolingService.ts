@@ -14,8 +14,11 @@ export class ApexToolingService{
     private userName: string;
 	private password: string;
 	private instanceUrl: string;
+    private outputChannel: vscode.OutputChannel;
 
-    public constructor(context: vscode.ExtensionContext){
+    public constructor(context: vscode.ExtensionContext, outputChannel: vscode.OutputChannel){
+        this.outputChannel = outputChannel;
+
         this.jarPath = context.asAbsolutePath(path.join(BIN, JAR));
         this.tempFolder = context.asAbsolutePath(BIN);
 
@@ -29,9 +32,12 @@ export class ApexToolingService{
     public startService(){
         let cmd = `java -Dfile.encoding=UTF-8  -jar ${this.jarPath} --action=serverStart --port=65000 --timeoutSec=1800`;
 
+        this.outputChannel.appendLine(`Starting Language Server. CMD: ${cmd}`);
+
     	let child = child_process.exec(cmd);
 		child.stderr.on('data', function(data) {
 			console.log('stdout: ' + data);
+            this.outputChannel.appendLine('stdout: ' + data);
 		});
     }
 
@@ -116,6 +122,7 @@ export class ApexToolingService{
 					}
 					cmd +='\n';
 					console.log(cmd);
+                    this.outputChannel.appendLine(`Sending CMD: ${cmd}`);
 					client.write(cmd);
 				});
 
@@ -123,6 +130,7 @@ export class ApexToolingService{
                 client.on('data',(data) => {
   					let res = data.toString();
                     console.log(res);
+                    this.outputChannel.appendLine(res);
 				});
 
                 //return on end of data
@@ -144,6 +152,7 @@ export class ApexToolingService{
                     return new Promise((resolve, reject) => {
                         fs.readFile(responseFile, 'utf8', (err, data) => {
                             if (err){
+                                this.outputChannel.appendLine(err.message);
                                 reject(err);
                             }
                             resolve(data);
@@ -157,6 +166,7 @@ export class ApexToolingService{
         return (resolve, reject)=>{
             fs.writeFile(fileName, document.getText(), function(err) {
                 if (err){
+                    this.outputChannel.appendLine(err.message);
                     reject(err);
                 }
                 else resolve();

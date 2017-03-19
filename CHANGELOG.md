@@ -1,3 +1,6 @@
+# 0.2.6
+* Added output console to help with debugging issues
+
 # 0.2.1
 * Added delay (configurable) to check syntax to prevent it from spamming language service
 # 0.2.1
