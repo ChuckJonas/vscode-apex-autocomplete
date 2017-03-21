@@ -1,4 +1,7 @@
 # 0.2.6
+* Ability to specify `port` for tooling.force service
+
+# 0.2.6
 * Added output console to help with debugging issues
 
 # 0.2.1

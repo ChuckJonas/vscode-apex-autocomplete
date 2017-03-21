@@ -11,6 +11,7 @@ export class ApexToolingService{
     public tempFolder: string;
 
     private jarPath: string;
+    private port: number;
     private userName: string;
 	private password: string;
 	private instanceUrl: string;
@@ -23,6 +24,7 @@ export class ApexToolingService{
         this.tempFolder = context.asAbsolutePath(BIN);
 
         let config = vscode.workspace.getConfiguration('apexAutoComplete');
+        this.port = config.get('port') as number;
 		this.userName = config.get('userName') as string;
 		this.password = config.get('password') as string;
 		this.instanceUrl = config.get('instanceUrl') as string;
@@ -30,7 +32,7 @@ export class ApexToolingService{
     }
 
     public startService(){
-        let cmd = `java -Dfile.encoding=UTF-8  -jar ${this.jarPath} --action=serverStart --port=65000 --timeoutSec=1800`;
+        let cmd = `java -Dfile.encoding=UTF-8  -jar ${this.jarPath} --action=serverStart --port=${this.port} --timeoutSec=1800`;
 
         this.outputChannel.appendLine(`Starting Language Server. CMD: ${cmd}`);
 
@@ -109,7 +111,7 @@ export class ApexToolingService{
                 let client = new net.Socket();
 
                 //send command
-                client.connect(65000, '127.0.0.1',() => {
+                client.connect(this.port, '127.0.0.1',() => {
 					let cmd = `--action=${action}  --projectPath='${vscode.workspace.rootPath}' --responseFilePath='${responseFile}' --pollWaitMillis=1000 --maxPollRequests=1000 `;
                     if(opts.size > 0){
                         for (var [key, value] of opts) {

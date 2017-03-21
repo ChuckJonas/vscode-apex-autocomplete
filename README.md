@@ -56,6 +56,9 @@ To get completions on SObject & SOQL Queries, you must add org creditionals to y
 
     // if check sytanx is enable, how long to wait after typing
     "apexAutoComplete.checkSyntaxDelay": 400,
+
+    // port to run the force.tooling service on
+    "apexAutoComplete.port": 6500,
 ```
 
 Please reload after updating settings!

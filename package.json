@@ -2,10 +2,10 @@
   "name": "apex-autocomplete",
   "displayName": "Salesforce Auto-Complete +",
   "description": "Adds Auto-Completion (and more!) for Salesforce Apex & Visualforce",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "publisher": "chuckjonas",
   "engines": {
-    "vscode": "^1.5.0"
+    "vscode": "^1.5.1"
   },
   "repository": {
     "type": "git",
@@ -82,6 +82,11 @@
             "type": "number",
             "default": "400",
             "description": "If Check syntax is enabled, determines how long to wait after typing to run."
+        },
+        "apexAutoComplete.port": {
+            "type": "number",
+            "default": "65000",
+            "description": "The port to run the language tooling.force.com service on"
         }
       }
     }
