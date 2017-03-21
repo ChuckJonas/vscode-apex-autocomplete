@@ -37,9 +37,14 @@ export class ApexToolingService{
         this.outputChannel.appendLine(`Starting Language Server. CMD: ${cmd}`);
 
     	let child = child_process.exec(cmd);
-		child.stderr.on('data', function(data) {
-			console.log('stdout: ' + data);
-            this.outputChannel.appendLine('stdout: ' + data);
+		child.stderr.on('data', (data) => {
+			console.log('stderr: ' + data);
+            this.outputChannel.appendLine('stderr: ' + data);
+		});
+
+        child.stdout.on('data', (data) => {
+			console.log(data);
+            this.outputChannel.appendLine(`${data}`);
 		});
     }
 
@@ -144,6 +149,7 @@ export class ApexToolingService{
 				client.on('error', (err: any) => {
 					if(err.code == 'ECONNREFUSED'){
 						//if we get this error, try to kick off server again
+                        this.outputChannel.appendLine(`Service not running! Restarting...`);
 						this.startService();
 					}
                     reject(err.message);
