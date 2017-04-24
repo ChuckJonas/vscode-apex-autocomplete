@@ -32,7 +32,7 @@ Quickly navigate to variable, function & class declarations
 
 Save time by spotting grammatical errors before sending code up to salesforce to compile.
 
-## Navigate Document Symbols
+### Navigate Document Symbols
 
 Quickly navigate to any function, property or subclass.  In the "Quick Open" bar `cmd-p` simply type `@` to navigate document symbols.
 
