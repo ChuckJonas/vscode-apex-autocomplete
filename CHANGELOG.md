@@ -1,12 +1,22 @@
+# 0.2.7
+
+* Renamed from "Salesforce Auto-Complete +" to "Salesforce Language Support"
+* Added Document Symbol Provider
+
 # 0.2.6
+
 * Ability to specify `port` for tooling.force service
 
 # 0.2.6
+
 * Added output console to help with debugging issues
 
 # 0.2.1
+
 * Added delay (configurable) to check syntax to prevent it from spamming language service
+
 # 0.2.1
+
 * Fixed bug with go-to definition not working on modified files
 
 # 0.2.0

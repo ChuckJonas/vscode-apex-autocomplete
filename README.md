@@ -1,4 +1,6 @@
-# Apex Auto-complete +
+# Salesforce Language Support (Previously 'Salesforce Auto-Complete +')
+
+[![Visual Studio Marketplace](https://vsmarketplacebadge.apphb.com/installs-short/chuckjonas.apex-autocomplete.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=chuckjonas.apex-autocomplete)
 
 This extension provides code completion and other language services for the salesforce apex programming language.
 
@@ -19,7 +21,6 @@ Currently provides auto-complete on the following:
 * SObject fields (requires auth)
 * SOQL Queries   (requires auth)
 
-
 ### Go-to/Peak Definition
 
 ![Go To Definitions](https://raw.githubusercontent.com/ChuckJonas/vscode-apex-autocomplete/master/images/go-to-def.gif)
@@ -29,6 +30,12 @@ Quickly navigate to variable, function & class declarations
 ### Syntax checking
 
 Save time by spotting grammatical errors before sending code up to salesforce to compile.
+
+## Navigate Document Symbols
+
+Quickly navigate to any function, property or subclass.  In the "Quick Open" bar `cmd-p` simply type `@` to navigate document symbols.
+
+![Go To Definitions](https://raw.githubusercontent.com/ChuckJonas/vscode-apex-autocomplete/master/images/document-symbols.gif)
 
 ## Requirements
 
