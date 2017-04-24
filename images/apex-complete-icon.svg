@@ -2,8 +2,8 @@
  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
  <g>
   <title>Layer 1</title>
-  <rect fill="#141414" stroke-width="4" x="2.00001" y="1.5" width="145.99999" height="148" id="svg_3" stroke="#000000"/>
-  <text fill="#bfbfbf" stroke="#000000" stroke-width="0" x="73" y="70.5" id="svg_1" font-size="24" font-family="Monospace" text-anchor="middle" xml:space="preserve">Apex</text>
-  <text fill="#bfbfbf" stroke-width="0" opacity="0.9" x="112.66843" y="102.87509" id="svg_2" font-size="24" font-family="Monospace" text-anchor="middle" xml:space="preserve" transform="matrix(0.7169798578385169,0,0,0.7169798578385169,-4.78099802083631,26.153459151842206) " stroke="#000000">Auto-Complete</text>
+  <rect stroke="#000000" id="svg_3" height="148" width="145.99999" y="1.5" x="2.00001" stroke-width="4" fill="#141414"/>
+  <text stroke="#000000" transform="matrix(0.9375067949295044,0,0,0.9375067949295044,9.061514735221863,4.780730187892914) " xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="24" id="svg_1" y="71.56666" x="69.80002" stroke-width="0" fill="#bfbfbf">Salesforce</text>
+  <text stroke="#000000" transform="matrix(0.5535504743013745,0,0,0.5535504743013745,35.35556066503998,47.06296803331977) " xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="24" id="svg_2" y="89.02912" x="72.52472" opacity="0.9" stroke-width="0" fill="#bfbfbf">Language Support</text>
  </g>
 </svg>

@@ -5,6 +5,7 @@ import {ApexToolingService} from './lib/apexToolingService';
 import {ApexCompletionItemProvider} from './lib/apexCompletionProvider';
 import {VfCompletionItemProvider} from './lib/vfCompletionProvider';
 import {ApexDefinitionProvider} from './lib/apexDefinitionProvider';
+import {ApexDocumentSymbolProvider} from './lib/apexDocumentSymbolProvider';
 import {ApexSyntax} from './lib/syntaxCheck';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -35,6 +36,11 @@ export function activate(context: vscode.ExtensionContext) {
     vscode.languages.registerDefinitionProvider(
         'apex',
         new ApexDefinitionProvider(toolingService)
+    );
+
+    vscode.languages.registerDocumentSymbolProvider(
+        'apex',
+        new ApexDocumentSymbolProvider()
     );
 
     //Setup Check Syntax
