@@ -29,7 +29,7 @@
     "commands": [
       {
         "command": "apex-autocomplete.showOutput",
-        "title": "Show Apex Autocomplete Debug Output"
+        "title": "Show 'Salesforce Language Support' Debug Output"
       }
     ],
     "languages": [
@@ -56,7 +56,7 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "Salesforce Auto-Complete",
+      "title": "Salesforce Language Support",
       "properties": {
         "apexAutoComplete.userName": {
           "type": "string",
