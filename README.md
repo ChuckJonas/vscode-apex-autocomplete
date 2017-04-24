@@ -1,4 +1,5 @@
-# Salesforce Language Support (Previously 'Salesforce Auto-Complete +')
+# Salesforce Language Support
+*(Previously 'Salesforce Auto-Complete +')*
 
 [![Visual Studio Marketplace](https://vsmarketplacebadge.apphb.com/installs-short/chuckjonas.apex-autocomplete.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=chuckjonas.apex-autocomplete)
 
