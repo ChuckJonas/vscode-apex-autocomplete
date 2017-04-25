@@ -1,3 +1,7 @@
+# 0.2.10
+
+* Added apexdoc and javadoc style comment generation
+
 # 0.2.7
 
 * Renamed from "Salesforce Auto-Complete +" to "Salesforce Language Support"

@@ -6,6 +6,8 @@ import {ApexCompletionItemProvider} from './lib/apexCompletionProvider';
 import {VfCompletionItemProvider} from './lib/vfCompletionProvider';
 import {ApexDefinitionProvider} from './lib/apexDefinitionProvider';
 import {ApexDocumentSymbolProvider} from './lib/apexDocumentSymbolProvider';
+import {DocumentCommentCommand, DocumentCommentGenerator} from './lib/docCommentCommand';
+import {ApexDocGenerator, JavaDocGenerator} from './lib/apexDocGenerator';
 import {ApexSyntax} from './lib/syntaxCheck';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -43,8 +45,10 @@ export function activate(context: vscode.ExtensionContext) {
         new ApexDocumentSymbolProvider()
     );
 
-    //Setup Check Syntax
+
     let config = vscode.workspace.getConfiguration('apexAutoComplete');
+
+    //Setup Check Syntax
     if(config.get('checkSyntax') as boolean){
         const collection = vscode.languages.createDiagnosticCollection('apex-syntax');
         let delay = config.get('checkSyntaxDelay') as number;
@@ -61,6 +65,25 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.workspace.onDidCloseTextDocument((textDocument) => {
             collection.delete(textDocument.uri);
         });
+    }
+
+    //setup doc generator
+    let docGen: DocumentCommentGenerator;
+    switch(config.get('docGenerationFormat') as string){
+        case 'javadoc':
+            docGen = new JavaDocGenerator();
+            break;
+        default:
+            docGen = new ApexDocGenerator();
+            break;
+    }
+    if(docGen){
+        context.subscriptions.push(
+            vscode.commands.registerTextEditorCommand('salesforce-language-support.generateComment', (textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit, args: any[]) => {
+                let docGenerator = new DocumentCommentCommand(textEditor, docGen);
+                return docGenerator.generateDocComment();
+            })
+        );
     }
 
 }
