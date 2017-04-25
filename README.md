@@ -1,4 +1,5 @@
 # Salesforce Language Support
+
 *(Previously 'Salesforce Auto-Complete +')*
 
 [![Visual Studio Marketplace](https://vsmarketplacebadge.apphb.com/installs-short/chuckjonas.apex-autocomplete.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=chuckjonas.apex-autocomplete)
@@ -36,7 +37,20 @@ Save time by spotting grammatical errors before sending code up to salesforce to
 
 Quickly navigate to any function, property or subclass.  In the "Quick Open" bar `cmd-p` simply type `@` to navigate document symbols.
 
-![Go To Definitions](https://raw.githubusercontent.com/ChuckJonas/vscode-apex-autocomplete/master/images/document-symbols.gif)
+![Symbol Navigation](https://raw.githubusercontent.com/ChuckJonas/vscode-apex-autocomplete/master/images/document-symbols.gif)
+
+### Document Comment Generator
+
+Generate Documenation Comments based on the context. To use, set cursor anywhere in the context of the document and run `Generate Apexdoc`.
+
+![Doc Generation](https://raw.githubusercontent.com/ChuckJonas/vscode-apex-autocomplete/master/images/doc-generation.gif)
+
+Currently support [Apexdoc](https://github.com/SalesforceFoundation/ApexDoc) and [Javadoc](http://www.oracle.com/technetwork/articles/java/index-137868.html) style comments on the following symbol types:
+
+* Class Header
+* Constructors
+* Properties
+* Methods
 
 ## Requirements
 
@@ -64,6 +78,9 @@ To get completions on SObject & SOQL Queries, you must add org creditionals to y
 
     // if check sytanx is enable, how long to wait after typing
     "apexAutoComplete.checkSyntaxDelay": 400,
+
+    //The format of document generation to use. Currently support `apexdoc` & `javadoc`
+    "apexAutoComplete.docGenerationFormat": "apexdoc",
 
     // port to run the force.tooling service on
     "apexAutoComplete.port": 6500,

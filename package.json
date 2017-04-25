@@ -2,7 +2,7 @@
   "name": "apex-autocomplete",
   "displayName": "Salesforce Language Support",
   "description": "Add language support tooling (code-completion, symbols, syntax check) for the Salesforce's Apex language.  Previously named 'Salesforce Auto-Complete +'",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "publisher": "chuckjonas",
   "engines": {
     "vscode": "^1.5.1"
@@ -30,6 +30,10 @@
       {
         "command": "apex-autocomplete.showOutput",
         "title": "Show 'Salesforce Language Support' Debug Output"
+      },
+      {
+        "command": "salesforce-language-support.generateComment",
+        "title": "Generate ApexDoc"
       }
     ],
     "languages": [
@@ -87,6 +91,11 @@
             "type": "number",
             "default": "65000",
             "description": "The port to run the language tooling.force.com service on"
+        },
+        "apexAutoComplete.docGenerationFormat": {
+            "type": "string",
+            "default": "apexdoc",
+            "description": "The format of document generation to use. Currently support `apexdoc` & `javadoc`"
         }
       }
     }
@@ -107,6 +116,6 @@
     "@types/mocha": "^2.2.32"
   },
   "dependencies": {
-    "apex-parser-ts":"1.0.8"
+    "apex-parser-ts":"1.0.14"
   }
 }
