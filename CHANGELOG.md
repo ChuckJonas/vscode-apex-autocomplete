@@ -1,3 +1,7 @@
+# 0.2.11
+
+* Fixed bad path that was breaking windows go-to-def (thanks @svelamoor)
+
 # 0.2.10
 
 * Added apexdoc and javadoc style comment generation
