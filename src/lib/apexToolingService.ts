@@ -32,7 +32,7 @@ export class ApexToolingService{
     }
 
     public startService(){
-        let cmd = `java -Dfile.encoding=UTF-8  -jar ${this.jarPath} --action=serverStart --port=${this.port} --timeoutSec=1800`;
+        let cmd = `java -Dfile.encoding=UTF-8  -jar "${this.jarPath}" --action=serverStart --port=${this.port} --timeoutSec=1800`;
 
         this.outputChannel.appendLine(`Starting Language Server. CMD: ${cmd}`);
 
