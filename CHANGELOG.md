@@ -1,3 +1,7 @@
+# 0.2.12
+
+* Issues with spaces in jar path (thanks @Codeneos)
+
 # 0.2.11
 
 * Fixed bad path that was breaking windows go-to-def (thanks @svelamoor)
