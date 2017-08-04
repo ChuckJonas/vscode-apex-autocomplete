@@ -2,7 +2,7 @@
   "name": "apex-autocomplete",
   "displayName": "Salesforce Language Support",
   "description": "Add language support tooling (code-completion, symbols, syntax check) for the Salesforce's Apex language.  Previously named 'Salesforce Auto-Complete +'",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "publisher": "chuckjonas",
   "engines": {
     "vscode": "^1.5.1"
@@ -11,7 +11,7 @@
     "type": "git",
     "url": "https://github.com/ChuckJonas/vscode-apex-autocomplete.git"
   },
-  "icon": "images/apex-complete-icon.svg",
+  "icon": "images/apex-complete-icon.png",
   "bugs": {
     "url": "https://github.com/ChuckJonas/vscode-apex-autocomplete/issues"
   },
